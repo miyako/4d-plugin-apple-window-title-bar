@@ -22,3 +22,13 @@ HIDE WINDOW TITLE BAR (window)
 Parameter|Type|Description
 ------------|------------|----
 window|LONGINT|
+
+## Related projects
+
+other ways to customise a window on Mac
+
+* https://github.com/miyako/4d-plugin-custom-window/
+
+* https://github.com/miyako/4d-plugin-window-icon
+
+* https://github.com/miyako/4d-plugin-window-button
