@@ -27,7 +27,7 @@ window|LONGINT|
 
 other ways to customise a window on Mac
 
-* https://github.com/miyako/4d-plugin-custom-window/
+* https://github.com/miyako/4d-plugin-custom-window
 
 * https://github.com/miyako/4d-plugin-window-icon
 
