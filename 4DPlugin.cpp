@@ -81,9 +81,13 @@ void HIDE_WINDOW_TITLE_BAR(sLONG_PTR *pResult, PackagePtr pParams)
 	Param1.fromParamAtIndex(pParams, 1);
 
 #if CGFLOAT_IS_DOUBLE
-	NSWindow *window = getWindow(Param1);
-	[window setTitleVisibility:NO];
-	[window setStyleMask:[window styleMask]|NSFullSizeContentViewWindowMask];
+    NSWindow *window = getWindow(Param1);
+    [window setTitleVisibility:NO];
+    try {
+        [window setStyleMask:[window styleMask]|NSFullSizeContentViewWindowMask];
+    } catch (...) {
+        
+    }
 	[window setTitlebarAppearsTransparent:YES];
 #endif
 }
