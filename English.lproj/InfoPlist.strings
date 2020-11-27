@@ -1,1 +1,1 @@
-/* Localized versions of Info.plist keys */CFBundleName = "Apple window title bar";CFBundleShortVersionString = "1.3";CFBundleGetInfoString = "Apple window title bar version 1.3, Copyright 2019 miyako.";
+/* Localized versions of Info.plist keys */CFBundleName = "Apple window title bar";CFBundleShortVersionString = "1.0.0";CFBundleGetInfoString = "Apple window title bar version 1.0.0, Copyright 2020 miyako.";
