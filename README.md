@@ -5,6 +5,8 @@
 
 **Note**: for v17 and earlier, move `manifest.json` to `Contents`
 
+for v19 consider [4d-plugin-window-style](https://github.com/miyako/4d-plugin-window-style)
+
 # 4d-plugin-apple-window-title-bar
 Make window content view display behind title bar
 
