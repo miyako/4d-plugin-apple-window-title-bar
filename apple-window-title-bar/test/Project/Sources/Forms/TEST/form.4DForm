@@ -1,4 +1,4 @@
-﻿{
+{
 	"destination": "detailScreen",
 	"rightMargin": 0,
 	"bottomMargin": 0,
@@ -23,18 +23,9 @@
 					"type": "rectangle",
 					"top": 0,
 					"left": 0,
-					"width": 120,
-					"height": 308,
-					"sizingY": "grow",
-					"fill": "#696969",
-					"stroke": "transparent"
-				},
-				"Rectangle1": {
-					"type": "rectangle",
-					"top": 0,
-					"left": 120,
-					"width": 140,
-					"height": 308,
+					"width": 247,
+					"height": 245,
+					"fill": "#596DAE",
 					"sizingX": "grow",
 					"sizingY": "grow",
 					"stroke": "transparent"
@@ -45,8 +36,8 @@
 			"objects": {
 				"Button": {
 					"type": "button",
-					"top": 278,
-					"left": 126,
+					"top": 144,
+					"left": 82,
 					"width": 120,
 					"height": 22,
 					"sizingX": "move",
@@ -56,21 +47,38 @@
 					"defaultButton": true,
 					"events": [
 						"onClick"
-					]
+					],
+					"action": "cancel"
 				},
-				"Button1": {
+				"Button6": {
 					"type": "button",
-					"top": 5,
-					"left": 140,
+					"top": 20,
+					"left": 82,
 					"width": 72,
-					"height": 38,
+					"height": 22,
 					"text": "Button",
 					"focusable": false,
 					"events": [
 						"onClick"
-					]
+					],
+					"method": "ObjectMethods/Button6.4dm"
 				}
 			}
 		}
-	]
+	],
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowTitle": "",
+	"geometryStamp": 71,
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"windowMinWidth": 100,
+	"windowMinHeight": 100
 }

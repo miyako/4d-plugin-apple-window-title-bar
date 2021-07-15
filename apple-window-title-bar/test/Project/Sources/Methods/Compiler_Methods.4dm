@@ -1,0 +1,11 @@
+//%attributes = {"invisible":true}
+C_OBJECT:C1216(generate_file_from_template; $1)
+C_TEXT:C284(generate_file_from_template; $2)
+C_TEXT:C284(generate_file_from_template; $3)
+C_BOOLEAN:C305(generate_file_from_template; $4)
+C_OBJECT:C1216(generate_project_infoplist; $1)
+C_OBJECT:C1216(generate_constants_xlf; $1)
+C_OBJECT:C1216(generate_project_xcode; $1)
+C_OBJECT:C1216(generate_project_vs; $1)
+C_OBJECT:C1216(generate_project_plugin_stub; $1)
+C_OBJECT:C1216(generate_project_source; $1)

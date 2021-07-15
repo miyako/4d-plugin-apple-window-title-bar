@@ -1,4 +1,4 @@
-﻿{
+{
 	"Sources/Methods/generate_project_xcode.4dm": {
 		"startSelection": 0,
 		"endSelection": 0,
@@ -173,11 +173,11 @@
 	"Sources/Methods/TEST.4dm": {
 		"startSelection": 0,
 		"endSelection": 0,
-		"firstSelectedLine": 40,
-		"lastSelectedLine": 40,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2019-07-07T00:11:38.643Z"
+		"stamp": "2021-07-15T22:19:50.004Z"
 	},
 	"Sources/Methods/TEST_v17.4dm": {
 		"startSelection": 0,
@@ -189,21 +189,48 @@
 		"stamp": "2019-07-07T00:13:49.000Z"
 	},
 	"Sources/Methods/update_manifest_json.4dm": {
-		"startSelection": 44,
-		"endSelection": 44,
-		"firstSelectedLine": 10,
-		"lastSelectedLine": 10,
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2019-12-13T04:37:40.619Z"
+		"stamp": "2021-07-15T06:50:25.972Z"
 	},
 	"Sources/Forms/TEST/method.4dm": {
-		"startSelection": 42,
-		"endSelection": 42,
-		"firstSelectedLine": 2,
-		"lastSelectedLine": 2,
+		"startSelection": 9,
+		"endSelection": 9,
+		"firstSelectedLine": 4,
+		"lastSelectedLine": 4,
 		"folding": [],
 		"bookmarks": [],
-		"stamp": "2020-11-27T08:09:10.625Z"
+		"stamp": "2021-04-22T15:57:28.535Z"
+	},
+	"Sources/Forms/TEST/ObjectMethods/Button1.4dm": {
+		"startSelection": 7,
+		"endSelection": 7,
+		"firstSelectedLine": 4,
+		"lastSelectedLine": 4,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2021-04-22T12:15:57.289Z"
+	},
+	"Sources/Forms/TEST/ObjectMethods/Button6.4dm": {
+		"startSelection": 7,
+		"endSelection": 7,
+		"firstSelectedLine": 4,
+		"lastSelectedLine": 4,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2021-04-22T15:57:34.880Z"
+	},
+	"Sources/Methods/Compiler_Variables.4dm": {
+		"startSelection": 0,
+		"endSelection": 0,
+		"firstSelectedLine": 0,
+		"lastSelectedLine": 0,
+		"folding": [],
+		"bookmarks": [],
+		"stamp": "2021-07-15T22:19:44.412Z"
 	}
 }

@@ -1,5 +1,10 @@
-﻿{
+{
 	"editors": [
+		{
+			"type": "form",
+			"id": 218,
+			"formName": "TEST"
+		},
 		{
 			"type": "explorer"
 		}

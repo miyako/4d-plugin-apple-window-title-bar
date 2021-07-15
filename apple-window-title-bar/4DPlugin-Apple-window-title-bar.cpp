@@ -43,14 +43,88 @@ void HIDE_WINDOW_TITLE_BAR(PA_PluginParameters params) {
     
     if(window) {
         
-        if ([window respondsToSelector:@selector(setTitleVisibility:)]) {
-            [window setTitleVisibility:NSWindowTitleHidden];
+            if ([window respondsToSelector:@selector(setTitlebarAppearsTransparent:)]) {
+        
+                if(!([window titlebarAppearsTransparent])){
+
+                    NSView *contentView = window.contentView;
+                    
+                    //these are identical
+                    NSRect contentViewFrame  = [contentView frame];
+                    NSRect contentViewBounds = [contentView bounds];
+                    
+                    NSRect windowFrame = [window frame];
+                    
+                    //get this before setting NSWindowStyleMaskFullSizeContentView
+                    CGFloat titlebarHeight = [window frame].size.height - contentViewFrame.size.height;
+
+                    [window setStyleMask:[window styleMask]
+                     |NSWindowStyleMaskBorderless
+                     |NSWindowStyleMaskUnifiedTitleAndToolbar
+                     |NSWindowStyleMaskFullSizeContentView];
+                                        
+                    [window setOpaque:NO];
+                    [window setTitlebarAppearsTransparent:YES];
+                    
+                    [window setBackgroundColor:[NSColor clearColor]];
+                    
+                    PA_ulong32 version = PA_Get4DVersion();
+
+                    //for v19
+                    if((version & 0x0000FFFF) >= 0x00001900){
+                        
+                        
+                        NSImage *myImage = [[NSImage alloc]initWithContentsOfURL:[NSURL fileURLWithPath:@"/Users/miyako/Desktop/492X0W.png"]]; 
+                       
+                        
+                        [[window contentView] setWantsLayer:YES];
+                        [[window contentView] layer].contents = myImage;
+                        
+//                    [contentView setBounds:NSMakeRect(contentViewBounds.origin.x,
+//                                                             contentViewBounds.origin.y,
+//                                                             contentViewBounds.size.width,
+//                                                             contentViewBounds.size.height)];
+          
+                        if(false){
+                            //default behaviour
+
+                        }
+//
+//                        [window.contentView setFrameOrigin:NSMakePoint(contentViewFrame.origin.x, contentViewFrame.origin.y - titlebarHeight)];
+//                        [window.contentView setBoundsOrigin:NSMakePoint(contentViewBounds.origin.x, contentViewBounds.origin.y - titlebarHeight*2)];
+//
+//                        [window setFrameOrigin:NSMakePoint(contentViewFrame.origin.x, contentViewFrame.origin.y - titlebarHeight)];
+                        
+//                        [window.contentView setFrameSize:NSMakeSize(
+//                                                                    contentViewFrame.size.width,
+//                                                                    contentViewFrame.size.height + titlebarHeight*2)];
+
+                        
+                        
+//                        [window.contentView setBoundsSize:NSMakeSize(
+//                                                                     contentViewBounds.size.width,
+//                                                                     contentViewBounds.size.height + titlebarHeight*2)];
+//
+//
+//                        [window.contentView setFrame:NSMakeRect(,
+//                                                                ,
+//                                                                contentViewFrame.size.width,
+//                                                                contentViewFrame.size.height)];
+//
+                        
+                    }
+
+                }
+                
+                
+            }
+            
         }
 
-        [window setStyleMask:[window styleMask]|NSFullSizeContentViewWindowMask];
-        [window setTitlebarAppearsTransparent:YES];
-          
-    }
+        if(false) {
+            //TODO: make this a separate plugin command
+            [window setMovableByWindowBackground:YES];
+        }
     
 }
 
