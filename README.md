@@ -31,3 +31,10 @@ other ways to customise a window on Mac
 * https://github.com/miyako/4d-plugin-window-icon
 
 * https://github.com/miyako/4d-plugin-window-button
+
+## Remarks
+
+broken in v19. the window title bar becomes transparent but the background does not extend behind it.
+
+<img width="247" alt="スクリーンショット 2021-07-16 7 21 19" src="https://user-images.githubusercontent.com/1725068/125865429-a387c198-0c77-491d-92bc-ba48aa7694a6.png">
+
