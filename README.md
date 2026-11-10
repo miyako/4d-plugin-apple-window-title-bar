@@ -85,6 +85,59 @@ $wRef:=Open window(50;50;400;300;My window)
 HIDE WINDOW TITLE BAR($wRef)
 ```
 
+## Native ownership maintenance
+
+The ownership audit at baseline `17dcef22f23617798eef46f910d8b8c3a3c282d7`
+includes dormant first-party helpers, not just commands with array metadata:
+
+| Surface | Compile/include reachability and ownership |
+|---|---|
+| `4DPlugin-Apple-window-title-bar.cpp/.h` | Both Xcode and Visual Studio source lists compile the entry plus SDK only. `PluginMain` dispatches selector 1 through `PA_RunInMainProcess`; its only command reads a Longint, not text. The header includes SDK and Cocoa, not the dormant wrappers. |
+| Source and bundled `manifest.json` | Both declare only `HIDE WINDOW TITLE BAR(&L)`. No text/array output; array metadata would identify capability, not ownership. |
+| `support/4DPlugin-JSON.cpp/.h` | Dormant in both projects. All string/picture/object/collection setters, scalar/reference getters, wide/narrow conversions and synchronous stringify were inspected. String/picture shallow assignments now start Undefined, avoiding lost initial empty allocations. Successful scalar and mismatched getter results are cleared; successful object/collection results hand off ownership to callers. Failed property reads throw before inspecting/clearing unspecified SDK output. |
+| `4D Plugin API/Classes/ARRAY_TEXT.cpp/.h` | Dormant. Copies borrowed elements into C++ strings and creates an independent SDK string for each accepted output; no disposal after transfer. Normal replacement/shrink/clear are covered. Allocation/resize failure behavior is not certified. |
+| `Classes/C_TEXT.cpp/.h`, `C_TYPES.h` | Dormant. Parameter inputs are copied; output uses the content setter, not descriptor transfer. UTF-8/UTF-16 conversion and C++ string ownership inspected. |
+| `Classes/C_BLOB.cpp/.h`, `C_LONGINT.cpp/.h` | Dormant. Blob/handle and scalar paths inspected; no string-descriptor transfer. No `CPicture`, `C_POINTER`, callback helper or independent JSON Parse input callsite exists in this first-party inventory. |
+| Bundled SDK `.c/.h`, `PublicTypes.h`, `PrivateTypes.h`, `EntryPoints.h`, `Flags.h`, `.def` | Compiled SDK and included ABI/selector headers inspected; `.def` exports `FourDPackex`, which calls the actual dispatcher. No SDK modifications. `include/json/*` and static jsoncpp libraries are third-party and excluded from fixes. |
+
+SDK follow-history starts at `86cda5af960fff1cfb8292b65860be4f26767134`;
+its last recorded path change is `bb39ecacdd433cc1986f4a87c6ce254eab416d6a`
+(`mv`). SHA-256 of `4DPluginAPI.c` is
+`5bac571c5c4cafd280fa7f23d775458a23701287e8735be27d4a2190002f4e3f`.
+The source's v14 and headers' v13 comments are not a verified upstream release
+identity. Guidance was checked at `miyako/skills@e6b492fcb81e5e1a7f7db723594b420e63bf6eb9`
+(merged guidance PRs 69 and 71).
+
+In this SDK, `PA_SetStringInArray` disposes the old element and shallow-transfers
+the descriptor only for Unicode arrays with non-null data, index zero through
+the current count, and a non-null descriptor pointer. Rejections retain caller
+ownership. Getters borrow; copy before mutation. `PA_SetStringVariable` and
+picture/reference setters shallow-alias; `PA_CreateVariable(eVK_Unistring)` can
+allocate even an empty value. `PA_ReturnString` instead calls `PA_SetUnistring`,
+an engine content setter. Object/collection element results are documented
+owning values: copy scalars before clearing; preserve successful reference
+handoffs and release them at the consumer. The SDK's internal synchronous
+arguments, JSON Parse implementation and returned-value handoffs were inspected,
+not rewritten. SDK-only application-path/picture-data output ownership and
+pointer metadata remain outside the verified contract; no speculative cleanup
+was added. SDK resize count corruption after allocation failure is deferred,
+not certified by ordinary array tests.
+
+On macOS, run
+`PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s .github/tests -p test_ownership.py -v`.
+This compiles the actual entry, **all** dormant first-party native helpers and
+the full unchanged SDK under ASan/UBSan, replacing only the engine callback.
+The same harness compiles the immutable baseline JSON helper: named failures
+demonstrate overwritten allocated empty strings, overwritten empty pictures,
+and uncleared owning string results. Fixed cases cover all four string setter
+overloads, ASCII/BMP/supplementary/empty text with exact UTF-16 units and UTF-8
+bytes, allocated/null empties, getter type mismatches, failed poisoned outputs,
+owning handoff survival, synchronous stringify cleanup, borrowed array copies,
+independent transfers, replacement/shrink/clear and rejected destinations.
+Explicit string/handle/reference balances supplement macOS's unavailable LSan.
+These synthetic, unsigned checks do not touch windows, invoke release/build
+phases, sign/package/publish binaries, or certify Windows or an actual 4D host.
+
 ## Manual source versioning and releases
 
 **Bump version** and **Build** are independent, manual Actions. Bump offers
